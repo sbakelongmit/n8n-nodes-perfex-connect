@@ -1,22 +1,20 @@
 # Publishing n8n-nodes-perfex-connect
 
-This folder is the content of the public GitHub repository for the n8n package. n8n verifies community nodes only when
-the package is on npm, published with npm provenance from a public GitHub repository.
+n8n verifies community nodes only when the package is on npm with npm provenance from a public GitHub repository.
+Releases use npm trusted publishing (GitHub Actions OIDC, no npm token) and npm staged publishing.
 
-## One-time set-up
+## One-time set-up (done for 1.5.0)
 
-1. Create a public GitHub repository named `n8n-nodes-perfex-connect` and push this folder to it.
-2. In `package.json` check `repository` and `bugs` (github.com/sbakelongmit/n8n-nodes-perfex-connect).
-3. On npmjs.com create an account (or organisation), then an access token of type "Automation" (or a granular token
-   with publish rights for this package).
-4. In the GitHub repository: Settings › Secrets and variables › Actions › New repository secret `NPM_TOKEN` = that token.
+1. npmjs.com › n8n-nodes-perfex-connect › Settings › Trusted publishing › GitHub Actions: user `sbakelongmit`,
+   repository `n8n-nodes-perfex-connect`, workflow `publish.yml`, no environment, allowed action "stage only".
+2. Delete any old publish token on npm and the `NPM_TOKEN` secret in GitHub (no longer used).
 
 ## Each release
 
-1. Set `version` in `package.json` (it follows the Perfex Connect version, e.g. 1.5.0).
-2. Commit, push, then create a GitHub release with the tag `v<version>`.
-3. The workflow "Publish to npm" builds, lints and runs `npm publish --provenance --access public`.
-4. Check the package: `npx @n8n/scan-community-package n8n-nodes-perfex-connect`.
-5. Submit the package for verification in the n8n Creator Portal.
+1. Set `version` in `package.json` (it follows the Perfex Connect version).
+2. Commit, push, then create a GitHub release with the tag `<version>`.
+3. The workflow "Publish to npm" builds, lints and runs `npm stage publish`.
+4. npmjs.com › Staged Packages › the new version › Approve (2FA). It is public from then on.
+5. Check: `npx @n8n/scan-community-package n8n-nodes-perfex-connect` (needs Node 22 or later).
 
 The workflow "Build and lint" runs on every push and pull request.

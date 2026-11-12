@@ -1,5 +1,7 @@
 name: Publish to npm
 
+# Trusted publishing (OIDC): no npm token. Each release is staged on npm and
+# goes public after the owner approves it under npmjs.com › Staged Packages (2FA).
 on:
   release:
     types: [published]
@@ -12,14 +14,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@11
       - run: npm install
       - run: npm run build
       - run: npm run lint
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm stage publish --access public
