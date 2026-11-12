@@ -1,0 +1,58 @@
+{
+    "name": "n8n-nodes-perfex-connect",
+    "version": "1.5.0",
+    "description": "n8n community nodes for Perfex CRM (Perfex Connect): a REST-hook trigger for CRM events and an action node for leads, customers, invoices, projects, tasks, tickets and more.",
+    "keywords": [
+        "n8n-community-node-package",
+        "perfex",
+        "perfex-crm",
+        "crm",
+        "perfex-connect"
+    ],
+    "license": "MIT",
+    "homepage": "https://perfexcrm.app/connect/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sbakelongmit/n8n-nodes-perfex-connect.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sbakelongmit/n8n-nodes-perfex-connect/issues"
+    },
+    "author": {
+        "name": "Perfex Connect",
+        "email": "support@perfexcrm.app",
+        "url": "https://perfexcrm.app/connect/"
+    },
+    "main": "index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc && node scripts/copy-assets.js",
+        "dev": "tsc --watch",
+        "lint": "eslint nodes credentials package.json",
+        "lintfix": "eslint nodes credentials package.json --fix",
+        "prepublishOnly": "npm run build && npm run lint"
+    },
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "credentials": [
+            "dist/credentials/PerfexConnectApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/PerfexConnect/PerfexConnect.node.js",
+            "dist/nodes/PerfexConnectTrigger/PerfexConnectTrigger.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "20.19.43",
+        "@typescript-eslint/parser": "7.18.0",
+        "eslint": "8.57.1",
+        "eslint-plugin-n8n-nodes-base": "1.16.7",
+        "n8n-workflow": "1.120.0",
+        "typescript": "5.9.3"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
