@@ -13,7 +13,7 @@ Releases use npm trusted publishing (GitHub Actions OIDC, no npm token) and npm 
 
 1. Set `version` in `package.json` (it follows the Perfex Connect version).
 2. Commit, push, then create a GitHub release with the tag `<version>`.
-3. The workflow "Publish to npm" builds, lints and runs `npm stage publish`.
+3. The workflow "Publish to npm" builds, lints and runs `npm stage publish` (also runnable by hand: Actions › Publish to npm › Run workflow).
 4. npmjs.com › Staged Packages › the new version › Approve (2FA). It is public from then on.
 5. Check: `npx @n8n/scan-community-package n8n-nodes-perfex-connect` (needs Node 22 or later).
 
