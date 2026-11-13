@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-perfex-connect",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "description": "n8n community nodes for Perfex CRM (Perfex Connect): a REST-hook trigger for CRM events and an action node for leads, customers, invoices, projects, tasks, tickets and more.",
     "keywords": [
         "n8n-community-node-package",
